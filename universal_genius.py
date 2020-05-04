@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import logging, argparse, sys, os, time
 from DataStore import DataStore
 from rpc import rpc
@@ -52,7 +53,7 @@ def main():
     if args.list_map:
         db.list()
 
-    logger.info("User {} rinning this script.".format(os.getlogin()))
+    logger.info("User {} running this script.".format(os.getlogin()))
 
     if args.put:
         logger.info("Adding mapping, {}".format(args.put))

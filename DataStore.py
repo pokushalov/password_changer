@@ -16,9 +16,9 @@ class DataStore:
             self.map = pickle.load(self.pkl_file)
             self.pkl_file.close()
         else:
-            logger.critical("No file with mapping exists: {}".format(self.file_name))
-            self.self.map = {}
-            return None
+            logger.critical("No file with mapping exists: {}, please add mapping".format(self.file_name))
+            self.map = {}
+        return None
 
     def save(self, data):
         self.logger.debug("In datastore::save")
