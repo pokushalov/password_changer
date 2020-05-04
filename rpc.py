@@ -1,5 +1,6 @@
-import pexpect, string, random
+import pexpect, string, random, time
 from timeout import timeout
+import config
 
 class rpc:
 
@@ -29,8 +30,8 @@ class rpc:
             self.logger.critical("Can't connect to host: {}".format(item[0]))
             return None
 
-
     def __init__(self, p_params, logger):
+        self.USERNAME = config.username
         self.CMDLINE = r"\[PEXPECT\]\$"
         self.SQLLINE = r"SQL>"
         self.TERMINAL_TYPE = 'vt100'
@@ -40,15 +41,16 @@ class rpc:
         self.logger.debug("Connection parameters are: {}".format(p_params))
         self.hostname = None
         self.pmon = None
-        self.USERNAME= "testunlock"
+
         for item in p_params:
             # let's try to spawn session to any of hosts
             self.hostname = item[0]
             self.pmon = item[1]
             self.logger.debug("Connecting to host: {}".format(self.hostname))
             self.conn = self._connect(self.hostname)
+            fileName = "logs/pexpect_" + time.strftime("%Y%m%d")
             if self.conn is not None:
-                self.conn.logfile = open("pexpect.log", "w")
+                self.conn.logfile = open(fileName, "a")
                 self.logger.debug("Setting command line for expect")
                 self.conn.sendline("PS1=" + self.CMDLINE)
                 self.conn.expect(self.CMDLINE)

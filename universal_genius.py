@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!python
 import logging, argparse, sys, os, time
 from DataStore import DataStore
 from rpc import rpc
@@ -45,15 +45,15 @@ def init_logging():
 
     return vlogger
 
+
 def main():
     args = ParseArgs()
     logger = init_logging()
+    logger.info("User [{}] running this script.".format(os.getlogin()))
     db = DataStore("pickle.pck", logger)
 
     if args.list_map:
         db.list()
-
-    logger.info("User {} running this script.".format(os.getlogin()))
 
     if args.put:
         logger.info("Adding mapping, {}".format(args.put))

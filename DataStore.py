@@ -18,11 +18,12 @@ class DataStore:
         else:
             logger.critical("No file with mapping exists: {}, please add mapping".format(self.file_name))
             self.map = {}
-        return None
 
     def save(self, data):
         self.logger.debug("In datastore::save")
-        if self.pkl_file.closed:
+        if self.pkl_file is None:
+            self.pkl_file = open(self.file_name, 'wb')
+        if self.pkl_file.closed :
             self.pkl_file = open(self.file_name, 'wb')
         pickle.dump(data, self.pkl_file)
         self.pkl_file.close()
@@ -33,7 +34,8 @@ class DataStore:
         self.logger.debug("In datastore::list")
         self.logger.debug("DataStore: list")
         self.logger.debug("Geting list of saved DB's")
-        print("List of database mapped in file:")
+        if self.map:
+            print("List of database mapped in file:")
 
         for db,v in sorted(self.map.items()):
             print("\tDatabase: {}".format(db.upper()))
