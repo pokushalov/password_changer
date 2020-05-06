@@ -45,10 +45,6 @@ Please send email to developer
 ## Usage
 
 ### Parameters:
-x | x| x
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
 
 
 Parameter | Help | Example
