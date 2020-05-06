@@ -7,7 +7,7 @@ This project was stated in order to get password self-service reset feature for 
 
 ### Prerequisites
 
-This was created for python 2.6.9 version due current limitations of destination hosts.
+This was created for python 2.7 version due current limitations of destination hosts.
 
 Destination host should have pre-defined ssh keys that will allow you to connect target host (passwordless).
 
