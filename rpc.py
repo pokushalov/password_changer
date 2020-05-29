@@ -89,4 +89,13 @@ class rpc:
             self._exec("exit;", self.CMDLINE)
             self.logger.info("User new password is: {}".format(new_pass))
         except:
-            self.logger.critical("Exception in proceed_changes. Please review log file.")
+            self.logger.critical("Exception in proceed_changes. Please review log file.") 
+            self.logger.critical("Request was for pmon [{0}]".format(self.pmon)) self._exec("", self.CMDLINE)
+            res = self._exec("ps -ef | grep pmon | awk -F pmon_ '{ print $2}' | sort | uniq | grep -v print | grep -Ev \"A$\"", self.CMDLINE)
+            lst_pmon = res.split("\n")
+            del lst_pmon[0]
+            del lst_pmon[-l]
+            self.logger.critical("Please review list of existing DBS on this host {0}:".format(self.hostname))
+            for pmon in sorted(lst_pmon):
+                self.logger.critical(pmon)
+
